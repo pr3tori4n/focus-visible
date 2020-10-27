@@ -106,7 +106,23 @@ function applyFocusVisiblePolyfill(scope) {
    * @param {KeyboardEvent} e
    */
   function onKeyDown(e) {
+    var allowedKeys = [
+      ' ',
+      'Tab',
+      'Escape',
+      'Enter',
+      'ArrowLeft',
+      'ArrowUp',
+      'ArrowRight',
+      'ArrowDown'
+    ];
+
     if (e.metaKey || e.altKey || e.ctrlKey) {
+      return;
+    }
+
+    // Ignore keypresses which aren't related to keyboard navigation.
+    if (allowedKeys.indexOf(e.key) === -1) {
       return;
     }
 
